@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,8 @@ namespace FacebookWinFormsApp
         private LoginResult m_LoginResult;
         private bool m_UserIsLoggedIn = false;
         private readonly AppSettings m_LastAppSetting;
+
+        public int YearChosenByTheUserForPosts { get; set; }
 
         public FormMain()
         {
@@ -60,7 +63,7 @@ namespace FacebookWinFormsApp
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText("design.patterns.c21"); /// the current password for Desig Patter
+            Clipboard.SetText("design.patterns.c21ב"); /// the current password for Desig Patter
 
             m_LoginResult = FacebookService.Login(
                     /// (This is Desig Patter's App ID. replace it with your own)
@@ -112,6 +115,7 @@ namespace FacebookWinFormsApp
 
             new Thread(fetchFriends).Start(); 
             new Thread(fetchEvents).Start();
+            //new Thread
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -310,6 +314,51 @@ namespace FacebookWinFormsApp
         private void ListBoxEvents_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ComboBox_Posts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           YearChosenByTheUserForPosts = Int32.Parse((sender as ComboBox).SelectedItem.ToString());
+
+            new Thread(fetchPostsByChosenYear).Start();
+
+        }
+
+        private void fetchPostsByChosenYear()
+        {
+            ListBox_Posts.Invoke(
+                new Action(
+                    () =>
+                        {
+                            ListBox_Posts.DisplayMember = Name;
+
+                            if (ListBox_Posts.SelectedItems != null)
+                            {
+                                ListBox_Posts.DataSource = null;
+                            }
+
+                            if(ComboBox_Posts.SelectedItem != null)
+                            {
+                                FacebookObjectCollection<Post> posts =
+                                    m_ApplicationFacade.GetPostsByTheChosenYear(YearChosenByTheUserForPosts);
+
+                                if (posts.Count == 0)
+                                {
+                                    MessageBox.Show("You have not posted any post at the chosen year");
+                                    
+                                }
+                                else
+                                {
+                                    ListBox_Posts.DataSource = posts;
+                                }
+                            }
+
+                        }));
         }
     }
 }

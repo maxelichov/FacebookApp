@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             System.Windows.Forms.Label descriptionLabel;
             System.Windows.Forms.Label endTimeLabel;
             System.Windows.Forms.Label locationLabel;
             System.Windows.Forms.Label startTimeLabel;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.buttonLogin = new System.Windows.Forms.Button();
             this.buttonLogout = new System.Windows.Forms.Button();
             this.ListBox_Friends = new System.Windows.Forms.ListBox();
@@ -47,13 +47,16 @@
             this.button_FriendTrivia = new System.Windows.Forms.Button();
             this.label_pickAFriend = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.eventBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
+            this.eventBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.endTimeDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.imageNormalPictureBox = new System.Windows.Forms.PictureBox();
             this.locationLabel1 = new System.Windows.Forms.Label();
             this.startTimeDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.ListBoxEvents = new System.Windows.Forms.ListBox();
+            this.ListBox_Posts = new System.Windows.Forms.ListBox();
+            this.Label_Posts = new System.Windows.Forms.Label();
+            this.ComboBox_Posts = new System.Windows.Forms.ComboBox();
             descriptionLabel = new System.Windows.Forms.Label();
             endTimeLabel = new System.Windows.Forms.Label();
             locationLabel = new System.Windows.Forms.Label();
@@ -63,6 +66,42 @@
             ((System.ComponentModel.ISupportInitialize)(this.eventBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageNormalPictureBox)).BeginInit();
             this.SuspendLayout();
+            // 
+            // descriptionLabel
+            // 
+            descriptionLabel.AutoSize = true;
+            descriptionLabel.Location = new System.Drawing.Point(50, 75);
+            descriptionLabel.Name = "descriptionLabel";
+            descriptionLabel.Size = new System.Drawing.Size(93, 20);
+            descriptionLabel.TabIndex = 0;
+            descriptionLabel.Text = "Description:";
+            // 
+            // endTimeLabel
+            // 
+            endTimeLabel.AutoSize = true;
+            endTimeLabel.Location = new System.Drawing.Point(50, 185);
+            endTimeLabel.Name = "endTimeLabel";
+            endTimeLabel.Size = new System.Drawing.Size(80, 20);
+            endTimeLabel.TabIndex = 2;
+            endTimeLabel.Text = "End Time:";
+            // 
+            // locationLabel
+            // 
+            locationLabel.AutoSize = true;
+            locationLabel.Location = new System.Drawing.Point(50, 238);
+            locationLabel.Name = "locationLabel";
+            locationLabel.Size = new System.Drawing.Size(74, 20);
+            locationLabel.TabIndex = 6;
+            locationLabel.Text = "Location:";
+            // 
+            // startTimeLabel
+            // 
+            startTimeLabel.AutoSize = true;
+            startTimeLabel.Location = new System.Drawing.Point(50, 144);
+            startTimeLabel.Name = "startTimeLabel";
+            startTimeLabel.Size = new System.Drawing.Size(86, 20);
+            startTimeLabel.TabIndex = 8;
+            startTimeLabel.Text = "Start Time:";
             // 
             // buttonLogin
             // 
@@ -235,19 +274,6 @@
             this.panel1.Size = new System.Drawing.Size(420, 308);
             this.panel1.TabIndex = 63;
             // 
-            // eventBindingSource
-            // 
-            this.eventBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Event);
-            // 
-            // descriptionLabel
-            // 
-            descriptionLabel.AutoSize = true;
-            descriptionLabel.Location = new System.Drawing.Point(50, 75);
-            descriptionLabel.Name = "descriptionLabel";
-            descriptionLabel.Size = new System.Drawing.Size(93, 20);
-            descriptionLabel.TabIndex = 0;
-            descriptionLabel.Text = "Description:";
-            // 
             // descriptionTextBox
             // 
             this.descriptionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.eventBindingSource, "Description", true));
@@ -257,14 +283,9 @@
             this.descriptionTextBox.Size = new System.Drawing.Size(200, 51);
             this.descriptionTextBox.TabIndex = 1;
             // 
-            // endTimeLabel
+            // eventBindingSource
             // 
-            endTimeLabel.AutoSize = true;
-            endTimeLabel.Location = new System.Drawing.Point(50, 185);
-            endTimeLabel.Name = "endTimeLabel";
-            endTimeLabel.Size = new System.Drawing.Size(80, 20);
-            endTimeLabel.TabIndex = 2;
-            endTimeLabel.Text = "End Time:";
+            this.eventBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Event);
             // 
             // endTimeDateTimePicker
             // 
@@ -283,15 +304,6 @@
             this.imageNormalPictureBox.TabIndex = 5;
             this.imageNormalPictureBox.TabStop = false;
             // 
-            // locationLabel
-            // 
-            locationLabel.AutoSize = true;
-            locationLabel.Location = new System.Drawing.Point(50, 238);
-            locationLabel.Name = "locationLabel";
-            locationLabel.Size = new System.Drawing.Size(74, 20);
-            locationLabel.TabIndex = 6;
-            locationLabel.Text = "Location:";
-            // 
             // locationLabel1
             // 
             this.locationLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.eventBindingSource, "Location", true));
@@ -300,15 +312,6 @@
             this.locationLabel1.Size = new System.Drawing.Size(200, 23);
             this.locationLabel1.TabIndex = 7;
             this.locationLabel1.Text = "label1";
-            // 
-            // startTimeLabel
-            // 
-            startTimeLabel.AutoSize = true;
-            startTimeLabel.Location = new System.Drawing.Point(50, 144);
-            startTimeLabel.Name = "startTimeLabel";
-            startTimeLabel.Size = new System.Drawing.Size(86, 20);
-            startTimeLabel.TabIndex = 8;
-            startTimeLabel.Text = "Start Time:";
             // 
             // startTimeDateTimePicker
             // 
@@ -333,6 +336,48 @@
             this.ListBoxEvents.Tag = "llFriends";
             this.ListBoxEvents.SelectedIndexChanged += new System.EventHandler(this.ListBoxEvents_SelectedIndexChanged);
             // 
+            // ListBox_Posts
+            // 
+            this.ListBox_Posts.FormattingEnabled = true;
+            this.ListBox_Posts.ItemHeight = 20;
+            this.ListBox_Posts.Location = new System.Drawing.Point(1759, 474);
+            this.ListBox_Posts.Name = "ListBox_Posts";
+            this.ListBox_Posts.Size = new System.Drawing.Size(267, 304);
+            this.ListBox_Posts.TabIndex = 65;
+            this.ListBox_Posts.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // Label_Posts
+            // 
+            this.Label_Posts.AutoSize = true;
+            this.Label_Posts.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_Posts.Location = new System.Drawing.Point(1824, 360);
+            this.Label_Posts.Name = "Label_Posts";
+            this.Label_Posts.Size = new System.Drawing.Size(102, 37);
+            this.Label_Posts.TabIndex = 66;
+            this.Label_Posts.Text = "Posts";
+            // 
+            // ComboBox_Posts
+            // 
+            this.ComboBox_Posts.FormattingEnabled = true;
+            this.ComboBox_Posts.Items.AddRange(new object[] {
+            "2010",
+            "2011",
+            "2012",
+            "2013",
+            "2014",
+            "2015",
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021"});
+            this.ComboBox_Posts.Location = new System.Drawing.Point(1759, 421);
+            this.ComboBox_Posts.Name = "ComboBox_Posts";
+            this.ComboBox_Posts.Size = new System.Drawing.Size(267, 28);
+            this.ComboBox_Posts.TabIndex = 67;
+            this.ComboBox_Posts.SelectedIndexChanged += new System.EventHandler(this.ComboBox_Posts_SelectedIndexChanged);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -341,7 +386,10 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.LightCyan;
-            this.ClientSize = new System.Drawing.Size(1765, 874);
+            this.ClientSize = new System.Drawing.Size(2052, 874);
+            this.Controls.Add(this.ComboBox_Posts);
+            this.Controls.Add(this.Label_Posts);
+            this.Controls.Add(this.ListBox_Posts);
             this.Controls.Add(this.ListBoxEvents);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label_pickAFriend);
@@ -394,6 +442,9 @@
         private System.Windows.Forms.Label locationLabel1;
         private System.Windows.Forms.DateTimePicker startTimeDateTimePicker;
         private System.Windows.Forms.ListBox ListBoxEvents;
+        private System.Windows.Forms.Label Label_Posts;
+        private System.Windows.Forms.ComboBox ComboBox_Posts;
+        private System.Windows.Forms.ListBox ListBox_Posts;
     }
 }
 

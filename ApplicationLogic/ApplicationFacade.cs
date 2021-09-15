@@ -24,6 +24,7 @@ namespace ApplicationLogic
         private readonly LoginResult r_LogginResult;
         private static ApplicationFacade s_Instance = null;
         private static readonly object r_lockMember = new object();
+        
        
 
         public static void InitFacadeAccordingToLoggedInUser(User i_LoggedInUser)
@@ -78,8 +79,8 @@ namespace ApplicationLogic
             return m_TriviaManager.FriendProfilePicture; 
         }
 
-       
 
+        internal PostsFilterStrategy PostFileFilterStrategy { get; set; }
 
         private void initFriendList()
         {
@@ -117,8 +118,23 @@ namespace ApplicationLogic
             return LoggedInUserEvents;
         }
 
-          
-        
+        public FacebookObjectCollection<Post> GetLoggedInUserPosts()
+        {
+            FacebookObjectCollection<Post> LoggedInUserPosts;
+
+            try
+            {
+                LoggedInUserPosts = s_LoggedInUser.Posts;
+            }
+
+            catch (Exception)
+            {
+                throw new Exception("Some thing went wrong when trying to access posts");
+            }
+
+            return LoggedInUserPosts;
+        }
+
 
         public User LoggedInUser
         {
@@ -191,10 +207,7 @@ namespace ApplicationLogic
         }
 
 
-        //public List<int> GetAgeOptions(User)
-        //{
-
-        //}
+        
 
         public enum eKeyQuestion
         {
@@ -239,6 +252,16 @@ namespace ApplicationLogic
             BatYam,
         }
 
+        
 
+        public FacebookObjectCollection<Post> GetPostsByTheChosenYear(int i_YearChosenByTheUserForPosts)
+        {
+
+            PostFileFilterStrategy = new PostsFilterStrategy();
+            PostFileFilterStrategy.SortStrategy = new PostByChosenStrategy.ConcreteFilter();
+            FacebookObjectCollection<Post> filteredPosts = PostFileFilterStrategy.SortByChosenYear(GetLoggedInUserPosts(), i_YearChosenByTheUserForPosts);
+
+            return filteredPosts;
+        }
     }
 }

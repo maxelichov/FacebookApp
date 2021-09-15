@@ -59,7 +59,10 @@
   <ItemGroup>
     <Compile Include="ApplicationFacade.cs" />
     <Compile Include="EvolutionManager.cs" />
+    <Compile Include="IPostFilterStrategy.cs" />
     <Compile Include="PicturesGenerator.cs" />
+    <Compile Include="PostByChosenStrategy.cs" />
+    <Compile Include="PostsFilterStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomIndexGenerator.cs" />
     <Compile Include="TriviaManager.cs" />
