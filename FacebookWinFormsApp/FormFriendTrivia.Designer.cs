@@ -59,7 +59,7 @@
             this.button_FirstAnswer.TabIndex = 1;
             this.button_FirstAnswer.Text = "button1";
             this.button_FirstAnswer.UseVisualStyleBackColor = false;
-            this.button_FirstAnswer.Click += new System.EventHandler(this.checkAnswerEvent);
+            this.button_FirstAnswer.Click += new System.EventHandler(this.UserChoseAnAnswer);
             // 
             // button_SecondAnswer
             // 
@@ -72,7 +72,7 @@
             this.button_SecondAnswer.TabIndex = 2;
             this.button_SecondAnswer.Text = "button2";
             this.button_SecondAnswer.UseVisualStyleBackColor = false;
-            this.button_SecondAnswer.Click += new System.EventHandler(this.checkAnswerEvent);
+            this.button_SecondAnswer.Click += new System.EventHandler(this.UserChoseAnAnswer);
             // 
             // button_ThirdAnswer
             // 
@@ -85,7 +85,7 @@
             this.button_ThirdAnswer.TabIndex = 3;
             this.button_ThirdAnswer.Text = "button3";
             this.button_ThirdAnswer.UseVisualStyleBackColor = false;
-            this.button_ThirdAnswer.Click += new System.EventHandler(this.checkAnswerEvent);
+            this.button_ThirdAnswer.Click += new System.EventHandler(this.UserChoseAnAnswer);
             // 
             // button_FourthAnswer
             // 
@@ -98,7 +98,7 @@
             this.button_FourthAnswer.TabIndex = 4;
             this.button_FourthAnswer.Text = "button4";
             this.button_FourthAnswer.UseVisualStyleBackColor = false;
-            this.button_FourthAnswer.Click += new System.EventHandler(this.checkAnswerEvent);
+            this.button_FourthAnswer.Click += new System.EventHandler(this.UserChoseAnAnswer);
             // 
             // pictureBox_TriviaPicture
             // 
@@ -128,7 +128,7 @@
             this.Name = "FormFriendTrivia";
             this.Text = "Trivia Game";
             this.Load += new System.EventHandler(this.FormFriendTrivia_Load);
-            this.Click += new System.EventHandler(this.checkAnswerEvent);
+            this.Click += new System.EventHandler(this.UserChoseAnAnswer);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_TriviaPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

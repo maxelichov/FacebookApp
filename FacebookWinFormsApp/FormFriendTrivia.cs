@@ -213,7 +213,7 @@ namespace FacebookWinFormsApp
 
         
 
-        private void checkAnswerEvent(object sender, EventArgs e)
+        private void UserChoseAnAnswer(object sender, EventArgs e)
         {
             Button answer = sender as Button;
 
@@ -228,7 +228,7 @@ namespace FacebookWinFormsApp
 
         private void FormFriendTrivia_Load(object sender, EventArgs e)
         {
-
+             
         }
     }
 

@@ -1,9 +1,0 @@
-==========================Exercise Checking Report==========================
-Exercise No: 2
-First Student Details: 309350072 - max elichov
-Second Student Details: 204389209 - Niv gitzi
-Delivery Date: 30 - August - 2021
-Delivered In Delay: no
-Notes: none
-Visual Studio Version.: 2017
-========================End Exercise Checking Report========================
