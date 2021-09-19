@@ -13,19 +13,20 @@ using eKeyQuestion = ApplicationLogic.ApplicationFacade.eKeyQuestion;
 
 namespace ApplicationLogic
 {
-    public sealed class ApplicationFacade 
+    public sealed class ApplicationFacade
     {
 
 
-        private  EvolutionManager m_EvolutionManager;
-        private  TriviaManager m_TriviaManager;
+        private EvolutionManager m_EvolutionManager;
+        private TriviaManager m_TriviaManager;
         private static User s_LoggedInUser;
         private readonly List<User> r_LoggedInUserFriends;
         private readonly LoginResult r_LogginResult;
         private static ApplicationFacade s_Instance = null;
         private static readonly object r_lockMember = new object();
-        
-       
+        private readonly FacebookObjectCollection<Post> r_LoogedInUserPosts;
+
+
 
         public static void InitFacadeAccordingToLoggedInUser(User i_LoggedInUser)
         {
@@ -37,6 +38,10 @@ namespace ApplicationLogic
 
             s_LoggedInUser = i_LoggedInUser;
             r_LoggedInUserFriends = new List<User>();
+            r_LoogedInUserPosts = new FacebookObjectCollection<Post>();
+            
+            //r_LoggedInUserPosts = i_LoggedInUser.Posts;// todo
+
             initFriendList();
 
         }
@@ -76,7 +81,7 @@ namespace ApplicationLogic
         public Photo GetRandomProfilePicture()
         {
 
-            return m_TriviaManager.FriendProfilePicture; 
+            return m_TriviaManager.FriendProfilePicture;
         }
 
 
@@ -93,13 +98,58 @@ namespace ApplicationLogic
 
         public List<Photo> GetChosenFriendProfilePictures(User i_ChosenFriend)
         {
-            
 
-            m_EvolutionManager = new EvolutionManager(i_ChosenFriend); 
+
+            m_EvolutionManager = new EvolutionManager(i_ChosenFriend);
             return m_EvolutionManager.ChosenFriendProfilePictures;
 
         }
 
+
+        public object GetDataByDataType(eDataType i_DataType) // todo:check if this works.
+        {
+
+            object dataToReturn = null;
+
+            switch (i_DataType)
+            {
+                case eDataType.Events:
+
+                    dataToReturn = s_LoggedInUser.Events;
+
+                    break;
+
+                case
+                    
+                    eDataType.Posts:
+
+                    dataToReturn = s_LoggedInUser.Posts;
+
+                    break;
+
+                case eDataType.Albums:
+
+                    dataToReturn = s_LoggedInUser.Albums;
+
+                    break;
+
+                case eDataType.Friends:
+
+                    dataToReturn = s_LoggedInUser.Friends;
+
+                    break;
+            }
+
+            return dataToReturn;
+        }
+
+        public enum eDataType
+        {
+            Events = 0,
+            Posts,
+            Albums,
+            Friends
+        }
 
         public FacebookObjectCollection<Event> GetLoggedInUserEvents()
         {
@@ -109,8 +159,8 @@ namespace ApplicationLogic
             {
                 LoggedInUserEvents = s_LoggedInUser.Events;
             }
-            
-            catch(Exception)
+
+            catch (Exception)
             {
                 throw new Exception("Some thing went wrong when trying to access events");
             }
@@ -131,6 +181,8 @@ namespace ApplicationLogic
             {
                 throw new Exception("Some thing went wrong when trying to access posts");
             }
+
+            
 
             return LoggedInUserPosts;
         }
@@ -170,7 +222,7 @@ namespace ApplicationLogic
 
         }
 
-        public List<eKeyQuestion> GetKeyQuestions() 
+        public List<eKeyQuestion> GetKeyQuestions()
         {
             List<eKeyQuestion> listToReturn = new List<eKeyQuestion>();
 
@@ -207,7 +259,7 @@ namespace ApplicationLogic
         }
 
 
-        
+
 
         public enum eKeyQuestion
         {
@@ -252,13 +304,14 @@ namespace ApplicationLogic
             BatYam,
         }
 
-        
+
 
         public FacebookObjectCollection<Post> GetPostsByTheChosenYear(int i_YearChosenByTheUserForPosts)
         {
 
             PostFileFilterStrategy = new PostsFilterStrategy();
             PostFileFilterStrategy.SortStrategy = new PostByChosenStrategy.ConcreteFilter();
+            //todo:chnage GetLoggedInUserPosts() to s_LoggedInUser.Posts();
             FacebookObjectCollection<Post> filteredPosts = PostFileFilterStrategy.SortByChosenYear(GetLoggedInUserPosts(), i_YearChosenByTheUserForPosts);
 
             return filteredPosts;

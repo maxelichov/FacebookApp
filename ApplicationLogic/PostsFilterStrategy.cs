@@ -26,6 +26,5 @@ namespace ApplicationLogic
 
             return r_PostChosenByTheGivenYear;
         }
-
     }
 }

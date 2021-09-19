@@ -15,6 +15,8 @@ using CefSharp.Structs;
 using Message = FacebookWrapper.ObjectModel.Message;
 using ApplicationFacade = ApplicationLogic.ApplicationFacade;
 using System.Threading;
+using DataType = ApplicationLogic.ApplicationFacade.eDataType;
+    
 
 
 
@@ -334,8 +336,10 @@ namespace FacebookWinFormsApp
             ListBox_Posts.Invoke(
                 new Action(
                     () =>
-                        {
-                            ListBox_Posts.DisplayMember = Name;
+                    {
+                        
+
+                        ListBox_Posts.DisplayMember = Name;
 
                             if (ListBox_Posts.SelectedItems != null)
                             {
@@ -344,21 +348,26 @@ namespace FacebookWinFormsApp
 
                             if(ComboBox_Posts.SelectedItem != null)
                             {
-                                FacebookObjectCollection<Post> posts =
-                                    m_ApplicationFacade.GetPostsByTheChosenYear(YearChosenByTheUserForPosts);
 
-                                if (posts.Count == 0)
-                                {
-                                    MessageBox.Show("You have not posted any post at the chosen year");
+                            //FacebookObjectCollection<Post> //todo:implement in facade.
+                            //    posts =
+                            //        m_ApplicationFacade.GetDataByDataType(DataType.Posts) as FacebookObjectCollection<Post>;
+
+                            FacebookObjectCollection<Post> posts =
+                                m_ApplicationFacade.GetPostsByTheChosenYear(YearChosenByTheUserForPosts);
+
+                            if (posts.Count == 0)
+                            {
+                                MessageBox.Show("You have not posted any posts at the chosen year");
                                     
-                                }
-                                else
-                                {
-                                    ListBox_Posts.DataSource = posts;
-                                }
+                            }
+                            else
+                            {
+                                ListBox_Posts.DataSource = posts;
+                            }
                             }
 
-                        }));
+                    }));
         }
     }
 }
