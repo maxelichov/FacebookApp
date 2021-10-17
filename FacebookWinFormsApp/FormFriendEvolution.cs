@@ -66,7 +66,7 @@ namespace FacebookWinFormsApp
         }
          
 
-        // todo : move this to a class proxy in the future.
+        
 
         private void putPicturesDateInTheContainer(Photo i_ProfilePicture, PictureBox i_PictureBox)
         {
@@ -87,18 +87,6 @@ namespace FacebookWinFormsApp
                                            })));
 
 
-
-            //PictureBox yearOfThePhoto = new PictureBox();
-            //yearOfThePhoto.Text = i_ProfilePicture.CreatedTime.Value.Year.ToString();
-            //panel_ProfilePictures.Controls.Add(yearOfThePhoto);
-            //yearOfThePhoto.SizeMode = PictureBoxSizeMode.StretchImage;
-            //yearOfThePhoto.Height = 110;
-            //yearOfThePhoto.Width = 280;
-            //yearOfThePhoto.BorderStyle = BorderStyle.FixedSingle;
-            //yearOfThePhoto.BackColor = Color.LightSkyBlue;
-            //yearOfThePhoto.Top = yearOfThePhoto.Height * panel_ProfilePictures.Controls.Count;
-            //putDateInThePictureBox(i_ProfilePicture, yearOfThePhoto);
-
         }
 
         private void putDateInThePictureBox(Photo i_ProfilePic,PictureBox i_PictureBoxToPutIn)
@@ -114,14 +102,6 @@ namespace FacebookWinFormsApp
                                            })));
 
 
-
-
-
-            //var image = new Bitmap(i_PictureBoxToPutIn.Width, i_PictureBoxToPutIn.Height);
-            //var font = new Font("TimesNewRoman", 50, FontStyle.Bold, GraphicsUnit.Pixel);
-            //var graphics = Graphics.FromImage(image);
-            //graphics.DrawString(i_ProfilePic.CreatedTime.Value.Year.ToString(), font, Brushes.Red, new Point(70, 20));
-            //i_PictureBoxToPutIn.Image = image;
         }
 
         private void putPicturesInTheContainer(Photo i_ProfilePic)
@@ -142,20 +122,6 @@ namespace FacebookWinFormsApp
                                                m_FriendProfilePictures.Add(i_ProfilePic);
                                            })));
 
-
-
-
-            //PictureBox picBox = new PictureBox();
-            //picBox.Load(i_ProfilePic.PictureNormalURL);
-            //panel_ProfilePictures.Controls.Add(picBox);
-            //picBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            //picBox.Height = 110;
-            //picBox.Width = 280;
-            //picBox.BorderStyle = BorderStyle.FixedSingle;
-            //picBox.BackColor = Color.White;
-            //picBox.Top = picBox.Height * panel_ProfilePictures.Controls.Count;
-            //putPicturesDateInTheContainer(i_ProfilePic, picBox);
-            //m_FriendProfilePictures.Add(i_ProfilePic);
         }
 
 

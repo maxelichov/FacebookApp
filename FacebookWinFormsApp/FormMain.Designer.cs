@@ -190,7 +190,6 @@
             this.label_Trivia.Size = new System.Drawing.Size(302, 55);
             this.label_Trivia.TabIndex = 57;
             this.label_Trivia.Text = "Friend Trivia";
-            this.label_Trivia.Click += new System.EventHandler(this.label1_Click);
             // 
             // cb_ShowFriendProfilePictures
             // 
@@ -205,7 +204,6 @@
             this.cb_ShowFriendProfilePictures.TabIndex = 58;
             this.cb_ShowFriendProfilePictures.Text = "To See How A Friend Chnaged";
             this.cb_ShowFriendProfilePictures.UseVisualStyleBackColor = true;
-            this.cb_ShowFriendProfilePictures.CheckedChanged += new System.EventHandler(this.cb_ShowFriendProfilePictures_CheckedChanged);
             // 
             // cb_FriendTrivia
             // 
@@ -220,7 +218,6 @@
             this.cb_FriendTrivia.TabIndex = 59;
             this.cb_FriendTrivia.Text = "Take A Friend Trivia Test";
             this.cb_FriendTrivia.UseVisualStyleBackColor = true;
-            this.cb_FriendTrivia.CheckedChanged += new System.EventHandler(this.cb_FriendTrivia_CheckedChanged);
             // 
             // button_ShowFriendProfilePictures
             // 
@@ -256,7 +253,6 @@
             this.label_pickAFriend.Size = new System.Drawing.Size(152, 22);
             this.label_pickAFriend.TabIndex = 62;
             this.label_pickAFriend.Text = "PICK A FRIEND";
-            this.label_pickAFriend.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // panel1
             // 
@@ -334,7 +330,6 @@
             this.ListBoxEvents.Size = new System.Drawing.Size(420, 207);
             this.ListBoxEvents.TabIndex = 64;
             this.ListBoxEvents.Tag = "llFriends";
-            this.ListBoxEvents.SelectedIndexChanged += new System.EventHandler(this.ListBoxEvents_SelectedIndexChanged);
             // 
             // ListBox_Posts
             // 
@@ -344,7 +339,6 @@
             this.ListBox_Posts.Name = "ListBox_Posts";
             this.ListBox_Posts.Size = new System.Drawing.Size(267, 304);
             this.ListBox_Posts.TabIndex = 65;
-            this.ListBox_Posts.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // Label_Posts
             // 
@@ -409,7 +403,6 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login Form";
-            this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pb_ProfilePicture)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

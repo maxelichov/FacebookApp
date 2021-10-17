@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="ApplicationFacade.cs" />
     <Compile Include="EvolutionManager.cs" />
+    <Compile Include="FriendsAggregate.cs" />
     <Compile Include="IPostFilterStrategy.cs" />
     <Compile Include="PicturesGenerator.cs" />
     <Compile Include="PostByChosenStrategy.cs" />

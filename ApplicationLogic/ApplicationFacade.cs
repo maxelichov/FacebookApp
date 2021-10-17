@@ -19,8 +19,12 @@ namespace ApplicationLogic
 
         private EvolutionManager m_EvolutionManager;
         private TriviaManager m_TriviaManager;
+
         private static User s_LoggedInUser;
-        private readonly List<User> r_LoggedInUserFriends;
+        //private static UserProxy s_LoggedInUser;
+
+        private readonly FriendsAggregate r_LoggedInUserFriends;
+        //private readonly List<User> r_LoggedInUserFriends; //איך אנו יוצרים את הרשימה הזו?
         private readonly LoginResult r_LogginResult;
         private static ApplicationFacade s_Instance = null;
         private static readonly object r_lockMember = new object();
@@ -33,16 +37,17 @@ namespace ApplicationLogic
             s_LoggedInUser = i_LoggedInUser;
         }
 
-        private ApplicationFacade(User i_LoggedInUser)
+        private ApplicationFacade(User i_LoggedInUser) //changed
         {
 
             s_LoggedInUser = i_LoggedInUser;
-            r_LoggedInUserFriends = new List<User>();
+            //r_LoggedInUserFriends = new List<User>();
+            r_LoggedInUserFriends = new FriendsAggregate(s_LoggedInUser.Friends); //instead of list
             r_LoogedInUserPosts = new FacebookObjectCollection<Post>();
-            
+
             //r_LoggedInUserPosts = i_LoggedInUser.Posts;// todo
 
-            initFriendList();
+            //initFriendList();
 
         }
 
@@ -87,14 +92,8 @@ namespace ApplicationLogic
 
         internal PostsFilterStrategy PostFileFilterStrategy { get; set; }
 
-        private void initFriendList()
-        {
-            foreach (User friend in s_LoggedInUser.Friends)
-            {
-                r_LoggedInUserFriends.Add(friend);
-            }
-        }
 
+     
 
         public List<Photo> GetChosenFriendProfilePictures(User i_ChosenFriend)
         {
@@ -106,7 +105,7 @@ namespace ApplicationLogic
         }
 
 
-        public object GetDataByDataType(eDataType i_DataType) // todo:check if this works.
+        public object GetDataByDataType(eDataType i_DataType) 
         {
 
             object dataToReturn = null;
@@ -120,7 +119,7 @@ namespace ApplicationLogic
                     break;
 
                 case
-                    
+
                     eDataType.Posts:
 
                     dataToReturn = s_LoggedInUser.Posts;
@@ -182,7 +181,7 @@ namespace ApplicationLogic
                 throw new Exception("Some thing went wrong when trying to access posts");
             }
 
-            
+
 
             return LoggedInUserPosts;
         }
@@ -196,7 +195,8 @@ namespace ApplicationLogic
             }
         }
 
-        public List<User> LoggedInUserFriends
+        
+        public FriendsAggregate LoggedInUserFriends
         {
             get
             {
@@ -311,10 +311,10 @@ namespace ApplicationLogic
 
             PostFileFilterStrategy = new PostsFilterStrategy();
             PostFileFilterStrategy.SortStrategy = new PostByChosenStrategy.ConcreteFilter();
-            //todo:chnage GetLoggedInUserPosts() to s_LoggedInUser.Posts();
             FacebookObjectCollection<Post> filteredPosts = PostFileFilterStrategy.SortByChosenYear(GetLoggedInUserPosts(), i_YearChosenByTheUserForPosts);
 
             return filteredPosts;
         }
     }
 }
+

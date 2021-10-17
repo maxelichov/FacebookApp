@@ -16,7 +16,7 @@ using Message = FacebookWrapper.ObjectModel.Message;
 using ApplicationFacade = ApplicationLogic.ApplicationFacade;
 using System.Threading;
 using DataType = ApplicationLogic.ApplicationFacade.eDataType;
-    
+
 
 
 
@@ -25,7 +25,7 @@ namespace FacebookWinFormsApp
     public partial class FormMain : Form
     {
         private const string k_FormName = "FormMain";
-        private  static ApplicationFacade m_ApplicationFacade;
+        private static ApplicationFacade m_ApplicationFacade;
         private LoginResult m_LoginResult;
         private bool m_UserIsLoggedIn = false;
         private readonly AppSettings m_LastAppSetting;
@@ -35,16 +35,16 @@ namespace FacebookWinFormsApp
         public FormMain()
         {
 
-            
+
             InitializeComponent();
             FacebookWrapper.FacebookService.s_CollectionLimit = 100;
             m_LastAppSetting = AppSettings.LoadFromFile(m_ApplicationFacade);
             this.StartPosition = FormStartPosition.Manual;
-            
+
 
         }
 
-        
+
         protected override void OnShown(EventArgs e)
         {
 
@@ -57,11 +57,11 @@ namespace FacebookWinFormsApp
                 m_ApplicationFacade = ApplicationFacade.GetFacadeInstance();
 
 
-                 new Thread(fillTheUiWithTheLoggedInUserData).Start(); 
+                new Thread(fillTheUiWithTheLoggedInUserData).Start();
             }
         }
 
-        
+
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
@@ -115,19 +115,19 @@ namespace FacebookWinFormsApp
             })));
 
 
-            new Thread(fetchFriends).Start(); 
+            new Thread(fetchFriends).Start();
             new Thread(fetchEvents).Start();
-            //new Thread
+           
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            base.OnFormClosing(e); 
+            base.OnFormClosing(e);
             m_LastAppSetting.LastWindowSize = this.Size;
             m_LastAppSetting.LastWindowLocation = this.Location;
             m_LastAppSetting.RememberUser = cb_RememberMe.Checked;
 
-            if(m_LastAppSetting.RememberUser == true)
+            if (m_LastAppSetting.RememberUser == true)
             {
                 m_LastAppSetting.LastAccessToken = m_LoginResult.AccessToken;
             }
@@ -139,7 +139,7 @@ namespace FacebookWinFormsApp
 
             m_LastAppSetting.SaveToFile();
         }
-
+       
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
@@ -152,7 +152,7 @@ namespace FacebookWinFormsApp
 
             if (m_UserIsLoggedIn == true)
             {
-                new Thread(fetchFriends).Start(); 
+                new Thread(fetchFriends).Start();
             }
 
             else
@@ -166,41 +166,37 @@ namespace FacebookWinFormsApp
         {
 
             ListBoxEvents.Invoke(
-                
+
                 new Action(
                     () =>
+                    {
+                        eventBindingSource.DataSource = m_ApplicationFacade.GetLoggedInUserEvents();
+                        if (ListBoxEvents.Items.Count == 0)
                         {
-                            eventBindingSource.DataSource = m_ApplicationFacade.GetLoggedInUserEvents();
-                            if(ListBoxEvents.Items.Count == 0)
-                            {
-                                MessageBox.Show("Your event list is currently empty");
-                            }
-                        }));
+                            MessageBox.Show("Your event list is currently empty");
+                        }
+                    }));
         }
 
 
-    
+
 
         private void fetchFriends() 
         {
-
-            List<User> LoggedInUserFriends = m_ApplicationFacade.LoggedInUserFriends;
 
             try
             {
                 if (m_ApplicationFacade.LoggedInUser.Friends.Count > 0)
                 {
-                    foreach (User user in LoggedInUserFriends)
+                    foreach (User user in m_ApplicationFacade.LoggedInUserFriends)
                     {
-                        
-
-                        ListBox_Friends.Invoke(new Action(()=> ListBox_Friends.Items.Add(user)));
+                        ListBox_Friends.Invoke(new Action(() => ListBox_Friends.Items.Add(user)));
                     }
                 }
 
                 else
                 {
-                    
+
                     MessageBox.Show("Your Friends List Is Empty");
                 }
 
@@ -247,9 +243,9 @@ namespace FacebookWinFormsApp
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
-                    
+
                 }
-                
+
             }
 
             else
@@ -263,12 +259,12 @@ namespace FacebookWinFormsApp
             m_LastAppSetting.RememberUser = cb_RememberMe.Checked;
         }
 
-        
+
         private void button_ShowFriendProfilePictures_Click(object sender, EventArgs e)
         {
             cb_ShowFriendProfilePictures.Checked = true;
             cb_FriendTrivia.Checked = false;
-           
+
         }
 
         private void button_FriendTrivia_Click(object sender, EventArgs e)
@@ -277,55 +273,11 @@ namespace FacebookWinFormsApp
             cb_ShowFriendProfilePictures.Checked = false;
         }
 
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Label_FriendsList_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cb_ShowFriendProfilePictures_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void cb_FriendTrivia_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FormMain_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        void FormMain_Shown(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ListBoxEvents_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void ComboBox_Posts_SelectedIndexChanged(object sender, EventArgs e)
         {
-           YearChosenByTheUserForPosts = Int32.Parse((sender as ComboBox).SelectedItem.ToString());
+            YearChosenByTheUserForPosts = Int32.Parse((sender as ComboBox).SelectedItem.ToString());
 
             new Thread(fetchPostsByChosenYear).Start();
 
@@ -337,21 +289,16 @@ namespace FacebookWinFormsApp
                 new Action(
                     () =>
                     {
-                        
 
                         ListBox_Posts.DisplayMember = Name;
 
-                            if (ListBox_Posts.SelectedItems != null)
-                            {
-                                ListBox_Posts.DataSource = null;
-                            }
+                        if (ListBox_Posts.SelectedItems != null)
+                        {
+                            ListBox_Posts.DataSource = null;
+                        }
 
-                            if(ComboBox_Posts.SelectedItem != null)
-                            {
-
-                            //FacebookObjectCollection<Post> //todo:implement in facade.
-                            //    posts =
-                            //        m_ApplicationFacade.GetDataByDataType(DataType.Posts) as FacebookObjectCollection<Post>;
+                        if (ComboBox_Posts.SelectedItem != null)
+                        {
 
                             FacebookObjectCollection<Post> posts =
                                 m_ApplicationFacade.GetPostsByTheChosenYear(YearChosenByTheUserForPosts);
@@ -359,13 +306,13 @@ namespace FacebookWinFormsApp
                             if (posts.Count == 0)
                             {
                                 MessageBox.Show("You have not posted any posts at the chosen year");
-                                    
+
                             }
                             else
                             {
                                 ListBox_Posts.DataSource = posts;
                             }
-                            }
+                        }
 
                     }));
         }
